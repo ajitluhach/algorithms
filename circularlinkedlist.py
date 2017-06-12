@@ -63,12 +63,3 @@ class CircularQueue:
         """Rotate front element to the back of the queue."""
         if self._size > 0:
             self.tail = self._tail._next  # old head becomes new tail
-
-
-
-
-
-
-
-
-
