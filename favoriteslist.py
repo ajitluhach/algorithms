@@ -65,4 +65,3 @@ class FavoritesList:
             item =  walk.element()
             yield item._value
             walk = self._data.after(walk)
-
