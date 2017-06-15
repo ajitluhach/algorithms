@@ -1,7 +1,7 @@
 from treeabstractclass import Tree
 
 
-class BinaryTree:
+class BinaryTree(Tree):
     """An abstract class representing a binary tree structure."""
 
     # ---------------aditional abstract methods--------------------
