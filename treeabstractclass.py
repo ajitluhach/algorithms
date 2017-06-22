@@ -81,3 +81,11 @@ class Tree:
         if p is None:
             p = self.root()
         return self.height2(p)  # Start calculating height using height2
+    
+    def __iter__(self):
+        """Generate an iteration of the tree's elements."""
+        for p in self.positions():
+            yield p.element()
+
+    def positions(self):
+        """Replace the one of the fucntions from one of the tree traversal algorithms"""

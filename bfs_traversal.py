@@ -1,10 +1,13 @@
-def breadfirst(T):
-    queue = []  # Initialize a queue
-    queue.append(T.root()) # add the root of the tree to the queue
-    while queue is not None:  # untill queue becomes empty
-        ele = queue.pop()  # Get the last element from the queue
-        print(ele)  # Visit the element
-        for c in T.children(ele:  # for all children of the element
-            queue.(c)  # add the children to the queue
+def breadthfirst(self):
+    """Generate a breadth-first iteration of the positions of the tree.
+    This should go into abstract tree class, call it by positions"""
+    if not self.is_empty():
+        fringe = LinkedQueue()
+        fringe.enqueue(self.root())
+        while not fringe.is_empty():
+            p = fringe.dequeue()
+            yield p
+            for c in self.children(p):
+                fringe.enqueue(c)
 
 
