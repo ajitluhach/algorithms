@@ -57,12 +57,12 @@ class PositionalList(_DoublyLinkedBase):
 
     def before(self, p):
         """Return the position just before Position p (or None if p )"""
-        node = self.validate(p)
+        node = self._validate(p)
         return self._make_position(node._prev)
 
     def after(self, p):
         """Return the position of the element just after the node p)"""
-        node = self.validate(p)
+        node = self._validate(p)
         return self._make_position(node._next)
 
     def __iter__(self):
@@ -86,12 +86,12 @@ class PositionalList(_DoublyLinkedBase):
         return self._insert_between(e, self._trailer._prev, self.trailer)
 
     def add_before(self, p, e):
-        original = self.validate(p)
+        original = self._validate(p)
         return self._insert_between(e, original._prev, original)
 
     def delete(self, p):
         """Remove and return the element at position p."""
-        original = self.validate(p)
+        original = self._validate(p)
         return self._delete_node(original)
 
     def replace(self, p, e):
