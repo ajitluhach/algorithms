@@ -1,7 +1,7 @@
 from binarytree1 import BinaryTree
 
 
-class LinkedBinaryTree:
+class LinkedBinaryTree(BinaryTree):
     """Linked Binary Tree Representation of binary structures."""
 
     class _Node:
@@ -91,7 +91,8 @@ class LinkedBinaryTree:
     def add_root(self, e):
         """Place the element e at the root of an empty tree and return\
                 the new Position."""
-        if self._root is not None: raise ValueError('Root exists')
+        if self._root is not None:
+            raise ValueError('Root exists')
         self._size = 1
         self._root = self.Node(e)
         return self._make_position(self._root)
@@ -100,7 +101,8 @@ class LinkedBinaryTree:
         """Add the element e to the left of element at position p, if it
         already has a left child raise exception."""
         node = self._validate(p)
-        if node._left is not None: raise ValueError('Left child exists')
+        if node._left is not None:
+            raise ValueError('Left child exists')
         self._size += 1
         node._left = self._Node(e, node)
         return self._make_position(node._left)
@@ -108,9 +110,10 @@ class LinkedBinaryTree:
     def _add_right(self, p, e):
         """Doc is same as add_left, just change left to right."""
         node = self._validate(p)
-        if self._right is not None: raise ValueError('Right child exists')
+        if self._right is not None:
+            raise ValueError('Right child exists')
         self._size += 1
-        node._left = self._Node(e)
+        node._right = self._Node(e)
         return self._make_position(node._left)
 
     def replace(self, p, e):
@@ -121,12 +124,13 @@ class LinkedBinaryTree:
         return old
 
     def _delete(self, p):
-        """Delete the node at Position p, and replace it with its child,\
-                if any.
+        """Delete the node at Position p, and replace it with its child,
+        if any.
         Return the element that had been stored at Position p.
         Raise ValueError if Position p is invalid or has two childrens."""
         node = self._validate(p)
-        if self.num_children(p) == 2: raise ValueError('has two children')
+        if self.num_children(p) == 2:
+            raise ValueError('has two children')
         child = node._left if node.left else node.right
         if child is not None:
             child._parent = node._parent
@@ -146,7 +150,8 @@ class LinkedBinaryTree:
         """Attach trees t1 and t2 as left and right subtrees of external p."""
 
         node = self._validate(p)
-        if not self.is_leaf(p): raise ValueError('postion must be leaf')
+        if not self.is_leaf(p):
+            raise ValueError('postion must be leaf')
         if not type(self) is type(t1) is type(t2):  # all 3 must be same type
             raise TypeError('Tree types must match')
         self._size += len(t1) + len(t2)

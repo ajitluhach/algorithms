@@ -62,10 +62,10 @@ class Tree:
 
     def height2(self, p):
         """Return the height of the tree.
-        assuming self.chilren will take time less than O(n)
-        this algorithm computes the height, O(cp + 1) where cp is 
+        assuming self.children will take time less than O(n)
+        this algorithm computes the height, O(cp + 1) where cp is
         number of children of node p, traverses them one by one
-        Each position of T with exception to the root, is a child\
+        Each position of T with exception to the root, is a child
                 of another position, and thus contributes one to the sum
                 sump * cp = n - 1
                 Where n is total number of nodes in the Tree T, cp are chilren\
@@ -81,11 +81,12 @@ class Tree:
         if p is None:
             p = self.root()
         return self.height2(p)  # Start calculating height using height2
-    
+
     def __iter__(self):
         """Generate an iteration of the tree's elements."""
         for p in self.positions():
             yield p.element()
 
     def positions(self):
-        """Replace the one of the fucntions from one of the tree traversal algorithms"""
+        """Replace the one of the fucntions from one of the tree traversal
+        algorithms"""
