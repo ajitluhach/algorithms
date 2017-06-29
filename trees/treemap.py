@@ -154,7 +154,7 @@ class TreeMap(LinkedBinaryTree, MapBase):
                     leaf = self._add_right(p, item)
                 else:
                     leaf = self._add_left(p, item)
-            self._rebalance_access(leaf)
+            self._rebalance_insert(leaf)
 
     def __iter__(self):
         """Generate an iteration of all the keys in the map in order."""
@@ -185,3 +185,49 @@ class TreeMap(LinkedBinaryTree, MapBase):
                 return
             self._rebalance_access(p)  # hook for balanced tree subclasses
         raise KeyError('Key Error: ' + repr(k))
+
+    def _rebalance_access(self, p): pass
+
+    def _rebalance_insert(self, p): pass
+
+    def _rebalance_delete(self, p): pass
+
+    def _relink(self, parent, child, make_left_child):
+        """relink parent with the child node."""
+        if make_left_child:  # make it a left child
+            parent._left = child
+        else:  # else make it a right child
+            parent._right = child
+        if child is not None:
+            child._parent = parent
+
+    def _rotate(self, p):
+        """Rotate position  p above its parent."""
+        x = p._node
+        y = x._parent
+        z = y._parent
+        if z is None:
+            self._root = x
+            x._parent = None
+        else:
+            self._relink(z, x, y == z._left)  # x becomes the child of z, if
+            # y was the left child of z.
+        if x == y._left:
+            self._relink(y, x._right, True)  # if x is on left of y, then,
+            # make right child of x as, left child of y, because it is smaller
+            self._relink(x, y, False)  # y becomes right child of x
+        else:
+            self._relink(y, x._left, False)
+            self._relink(x, y, True)
+
+    def _restructure(self, x):
+        """Perform trinode restructure of Position x with parent/grandparent"""
+        y = self._parent(x)
+        z = self._parent(y)
+        if (x == self.right(y)) == (y == self.right(z)):
+            self._rotate(y)
+            return y
+        else:
+            self._rotate(x)
+            self._rotate(x)
+            return x
